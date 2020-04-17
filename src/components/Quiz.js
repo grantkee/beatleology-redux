@@ -5,6 +5,18 @@ import QuestionCount from './QuestionCount';
 import AnswerOption from './AnswerOption';
 
 export default function Quiz(props) {
+  function renderAnswerOptions(key){
+    return (
+      <AnswerOption
+        key={key.content}
+        answerContent={key.content}
+        answerType={key.type}
+        answer={props.answer}
+        questionId={props.questionId}
+        onAnswerSelect={props.onAnswerSelected}
+        />
+    )
+  }
   return(
     <div className='quiz'>
       <QuestionCount
