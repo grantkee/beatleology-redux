@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 //import quiz components
 import Question from './Question';
 
-export default function Main() {
+export default function Main(props) {
   const [counter, setCounter] = useState(0);
   const [questionId, setQuestionId] = useState(1);
   const [question, setQuestion] = useState('');

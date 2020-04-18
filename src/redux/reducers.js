@@ -12,4 +12,22 @@ const user = (state=initialState, action) => {
   }
 }
 
-export default combineReducers({user});
+const questions = (state=initialState, action) => {
+  switch(action.type) {
+    case 'QUIZ_QUESTIONS':
+      return action.value;
+    default:
+      return state;
+  }
+}
+
+const answers = (state=initialState, action) => {
+  switch(action.type){
+    case 'ANSWER_OPTIONS':
+      return action.value;
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({user, questions, answers});
