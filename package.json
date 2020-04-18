@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemone server/index.js --ignore ./src",
+    "server": "nodemon server/index.js --ignore ./src",
     "fullstack": "concurrently --kill-others \"react-scripts start\" \"nodemon server/index.js --ignore ./src\""
   },
   "eslintConfig": {
@@ -45,5 +45,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3333"
 }

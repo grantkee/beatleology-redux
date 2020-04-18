@@ -6,7 +6,7 @@ class Connection {
   constructor(){
     if (!this.pool){
       console.log('making connection...');
-      this.ppol = mysql.createPool({
+      this.pool = mysql.createPool({
         connectionLimit: 100,
         host: process.env.SQL_HOST,
         user: process.env.SQL_USER,

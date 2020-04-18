@@ -8,7 +8,7 @@ const port = process.env.PORT || 3333;
 app.use(bodyParser.json());
 
 //Routes
-app.use('/quiz', usersRouter);
+app.use('/quiz', quizRouter);
 
 app.get('/', (req, res) => {
   res.send('connected')
