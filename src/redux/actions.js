@@ -27,3 +27,8 @@ export const getAnswerOptions = id => (
     .catch(error => console.log(error));
   }
 );
+
+export const answerSelected = answer => ({
+  type: 'ANSWER_SELECTED',
+  value: answer
+});

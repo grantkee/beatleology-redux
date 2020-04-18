@@ -30,4 +30,11 @@ const answerOptions = (state=initialState, action) => {
   }
 }
 
+const answers = (state=initialState, action) => {
+  switch(action.type){
+    case 'ANSWER_SELECTED':
+      return 
+  }
+}
+
 export default combineReducers({user, questions, answerOptions});
