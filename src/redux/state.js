@@ -3,5 +3,7 @@ export default {
     email: '',
     isOn: false
   },
-  quizQuestions: []
+  quizQuestions: [],
+  answerOptions: [],
+  answerSelected: {}
 }

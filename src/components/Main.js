@@ -12,9 +12,9 @@ export default function Main(props) {
   let result = '';
 
   const useEffect = () => {
-    let shuffledAnswerOptions = quizQuestions.map(questions => shuffleArray(question.answers));
+    let shuffledAnswerOptions = shuffleArray(props.answerOptions)
 
-    setQuestion(quizQuestions[0].question);
+    setQuestion(props.quizQuestion);
     //call get from server to fill answer options array, setAnswerOption?
     setAnswerOptions(shuffledAnswerOptions[0]);
   }
