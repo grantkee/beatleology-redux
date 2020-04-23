@@ -48,7 +48,7 @@ export default function Main(props) {
         answerOptions={answerOptions}
         questionId={questionId}
         question={question}
-        questionTotal={questionTotal}
+        questionTotal={props.questions.length}
         onAnswerSelected={() => props.answerSelected}
       />
     </div>
