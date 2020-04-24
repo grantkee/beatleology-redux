@@ -3,7 +3,6 @@ import logo from '../logo.svg';
 //import quiz components
 import Question from './Question';
 import Quiz from './Quiz';
-import { getAnswerOptions } from '../redux/actions';
 
 export default function Main(props) {
   const [count, setCount] = useState(1);
@@ -48,12 +47,19 @@ export default function Main(props) {
   },[props.questions.length]);
 
   useEffect(()=>{
+    // props.getAnswerOptions();
     if(props.answerOptions !==0){
       let shuffledAnswerOptions = shuffleArray(props.answerOptions);
       setAnswerOptions(shuffledAnswerOptions);
       console.log(answerOptions)
     }
-  },[props.answerOptions, questionId]);
+  },[props.answerOptions]);
+
+  useEffect(()=>{
+    let shuffledAnswerOptions = shuffleArray(props.answerOptions);
+    // setQuestion(props.questions[questionId].question);
+    setAnswerOptions(shuffledAnswerOptions);
+  },[question])
 
   const handleAnswerSelection = (e) => {
     setAnswer(e.currentTarget.value);
@@ -61,15 +67,17 @@ export default function Main(props) {
     if (questionId < props.questions.length){
       setTimeout(() => nextQuestion(), 333)
     } else {
-
+      
     }
   }
 
   const nextQuestion = () => {
-    // let nuCount = count + 1;
-    // let nuQuestionId = questionId + 1;
+    let q = props.questions[questionId]
+    props.getAnswerOptions(q.id);
     setCount(count + 1);
     setQuestionId(questionId + 1);
+    setQuestion(q.question);
+    setAnswer('');
   }
   
   return (
