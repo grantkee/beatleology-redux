@@ -6,12 +6,11 @@ import Quiz from './Quiz';
 import { getAnswerOptions } from '../redux/actions';
 
 export default function Main(props) {
-  // const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [answerOptions, setAnswerOptions] = useState([]);
-  let answersCount = {};
   let result = '';
 
   const shuffleArray = arr => {
@@ -61,7 +60,25 @@ export default function Main(props) {
       setAnswerOptions(shuffledAnswerOptions);
       console.log(answerOptions)
     }
-  },[props.answerOptions]);
+  },[props.answerOptions, questionId]);
+
+  const handleAnswerSelection = (e) => {
+    setAnswer(e.currentTarget.value);
+    props.answerSelected(answer);
+    if (questionId < props.questions.length){
+      setTimeout(() => nextQuestion(), 333)
+    } else {
+
+    }
+  }
+
+  const nextQuestion = () => {
+    let nuCount = counter + 1;
+    let nuQuestionId = questionId + 1;
+    setCounter(nuCount);
+    setQuestionId(nuQuestionId);
+
+  }
   
   return (
     <div className="App">
@@ -75,7 +92,7 @@ export default function Main(props) {
         questionId={questionId}
         question={question}
         questionTotal={props.questions.length === 0 ? 'Loading...' : props.questions.length}
-        onAnswerSelected={() => props.answerSelected}
+        onAnswerSelected={handleAnswerSelection}
       />
     </div>
   )

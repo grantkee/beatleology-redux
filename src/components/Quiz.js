@@ -9,10 +9,10 @@ export default function Quiz(props) {
       <AnswerOption
         key={key.content}
         answerContent={key.content}
-        answerType={key.type}
+        answerType={key.answer_type}
         answer={props.answer}
         questionId={props.questionId}
-        onAnswerSelect={props.onAnswerSelected}
+        onAnswerSelected={props.onAnswerSelected}
         />
     );
 

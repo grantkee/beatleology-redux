@@ -11,6 +11,6 @@ const mapDispatchToProps = dispatch => ({
   getQuizQuestions: () => dispatch(getQuizQuestions()),
   getAnswerOptions: (id) => dispatch(getAnswerOptions(id)),
   answerSelected: (answer) => dispatch(answerSelected(answer))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
