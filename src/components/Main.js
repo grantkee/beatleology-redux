@@ -3,10 +3,11 @@ import logo from '../logo.svg';
 //import quiz components
 import Question from './Question';
 import Quiz from './Quiz';
+import { getAnswerOptions } from '../redux/actions';
 
 export default function Main(props) {
   // const [counter, setCounter] = useState(1);
-  const [questionId, setQuestionId] = useState(1);
+  const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [answerOptions, setAnswerOptions] = useState([]);
@@ -47,15 +48,20 @@ export default function Main(props) {
   //once we have quiz questions, load the first question
   useEffect(()=>{
     if(props.questions.length !== 0){
-      setQuestion(props.questions[questionId - 1].question);
+      let q = props.questions[questionId];
+      props.getAnswerOptions(q.id);
+      setQuestion(q.question);
+      setQuestionId(questionId + 1);
     }
   },[props.questions.length]);
 
   useEffect(()=>{
-    let shuffledAnswerOptions = shuffleArray(props.answerOptions);
-    setAnswerOptions(shuffledAnswerOptions);
-
-  },[questionId])
+    if(props.answerOptions !==0){
+      let shuffledAnswerOptions = shuffleArray(props.answerOptions);
+      setAnswerOptions(shuffledAnswerOptions);
+      console.log(answerOptions)
+    }
+  },[props.answerOptions]);
   
   return (
     <div className="App">
