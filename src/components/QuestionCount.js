@@ -11,5 +11,5 @@ export default function QuestionCount(props) {
 
 QuestionCount.propTypes = {
   counter: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired
+  total: PropTypes.oneOfType([ PropTypes.string.isRequired, PropTypes.number.isRequired]),
 };

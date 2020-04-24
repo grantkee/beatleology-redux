@@ -4,11 +4,11 @@ import initialState from './state';
 const user = (state=initialState, action) => {
   switch(action.type) {
     case 'LOGIN':
-      return action.value
+      return action.value;
     case 'LOGOUT':
-      return action.value
+      return action.value;
     default:
-      return state
+      return state;
   }
 }
 
@@ -33,8 +33,10 @@ const answerOptions = (state=initialState, action) => {
 const answers = (state=initialState, action) => {
   switch(action.type){
     case 'ANSWER_SELECTED':
-      return 
+      return action.value;
+    default:
+      return state;
   }
 }
 
-export default combineReducers({user, questions, answerOptions});
+export default combineReducers({user, questions, answerOptions, answers});

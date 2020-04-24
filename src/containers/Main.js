@@ -1,4 +1,4 @@
-import {connetct, connect} from 'react-redux';
+import {connect} from 'react-redux';
 import Main from '../components/Main';
 import {getQuizQuestions, getAnswerOptions, answerSelected} from '../redux/actions';
 

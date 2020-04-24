@@ -5,8 +5,7 @@ import QuestionCount from './QuestionCount';
 import AnswerOption from './AnswerOption';
 
 export default function Quiz(props) {
-  function renderAnswerOptions(key){
-    return (
+  const renderAnswerOptions = (key) => (
       <AnswerOption
         key={key.content}
         answerContent={key.content}
@@ -15,8 +14,8 @@ export default function Quiz(props) {
         questionId={props.questionId}
         onAnswerSelect={props.onAnswerSelected}
         />
-    )
-  }
+    );
+
   return(
     <div className='quiz'>
       <QuestionCount
@@ -33,9 +32,8 @@ export default function Quiz(props) {
 }
 
 Quiz.propTypes = {
-  counter: PropTypes.number.isRequired,
   questionId: PropTypes.number.isRequired,
-  questionTotal: PropTypes.number.isRequired,
+  questionTotal: PropTypes.oneOfType([ PropTypes.string.isRequired, PropTypes.number.isRequired]),
   question: PropTypes.string.isRequired,
   answer: PropTypes.string.isRequired,
   answerOptions: PropTypes.array.isRequired,
