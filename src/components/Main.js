@@ -67,7 +67,7 @@ export default function Main(props) {
     if (questionId < props.questions.length){
       setTimeout(() => nextQuestion(), 333)
     } else {
-      
+      setTimeout(()=> props.setResult())
     }
   }
 

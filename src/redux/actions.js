@@ -32,3 +32,8 @@ export const answerSelected = answer => ({
   type: 'ANSWER_SELECTED',
   value: answer
 });
+
+export const getResult = result => ({
+  type: 'GET_RESULT',
+  value: result
+})
