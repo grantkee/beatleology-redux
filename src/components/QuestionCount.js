@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 export default function QuestionCount(props) {
   return (
-    <div className="questionCount">
-      Question <span>{props.counter}</span> of <span>{props.total}</span>
+    <div className="question-count">
+      Question <span>{props.count}</span> of <span>{props.total}</span>
     </div>
   );
 }
 
 QuestionCount.propTypes = {
-  counter: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
   total: PropTypes.oneOfType([ PropTypes.string.isRequired, PropTypes.number.isRequired]),
 };

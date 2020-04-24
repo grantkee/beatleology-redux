@@ -6,7 +6,7 @@ import Quiz from './Quiz';
 import { getAnswerOptions } from '../redux/actions';
 
 export default function Main(props) {
-  const [counter, setCounter] = useState(1);
+  const [count, setCount] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -35,13 +35,6 @@ export default function Main(props) {
   //get questions
   useEffect(() => {
       props.getQuizQuestions();
-      // await setQuestion(props.questions[counter].question);
-    // setQuestion(props.questions[counter])
-    // props.getAnswerOptions(questionId);
-    // let newId = questionId +1;
-    // setQuestionId(newId);
-    // setQuestion(props.quizQuestion[counter - 1]);
-    //call get from server to fill answer options array, setAnswerOption?
   },[]);
   
   //once we have quiz questions, load the first question
@@ -73,11 +66,10 @@ export default function Main(props) {
   }
 
   const nextQuestion = () => {
-    let nuCount = counter + 1;
-    let nuQuestionId = questionId + 1;
-    setCounter(nuCount);
-    setQuestionId(nuQuestionId);
-
+    // let nuCount = count + 1;
+    // let nuQuestionId = questionId + 1;
+    setCount(count + 1);
+    setQuestionId(questionId + 1);
   }
   
   return (

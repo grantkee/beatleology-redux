@@ -19,7 +19,7 @@ export default function Quiz(props) {
   return(
     <div className='quiz'>
       <QuestionCount
-        counter={props.questionId}
+        count={props.questionId}
         total={props.questionTotal}
       />
       <Question content={props.question} />
