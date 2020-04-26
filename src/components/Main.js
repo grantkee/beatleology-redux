@@ -5,11 +5,12 @@ import Question from './Question';
 import Quiz from './Quiz';
 
 export default function Main(props) {
+  const {getQuizQuestions, getAnswerOptions, questions, answerOptions, answerSelected, setResult} = props;
   const [count, setCount] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
-  const [answerOptions, setAnswerOptions] = useState([]);
+  const [shuffledAnswers, setShuffledAnswers] = useState([]);
   let result = '';
 
   const shuffleArray = arr => {
@@ -33,52 +34,53 @@ export default function Main(props) {
 
   //get questions
   useEffect(() => {
-      props.getQuizQuestions();
+      getQuizQuestions();
   },[]);
   
   //once we have quiz questions, load the first question
   useEffect(()=>{
-    if(props.questions.length !== 0){
-      let q = props.questions[questionId];
-      props.getAnswerOptions(q.id);
+    if(questions.length !== 0){
+      let q = questions[questionId];
+      getAnswerOptions(q.id);
       setQuestion(q.question);
       setQuestionId(questionId + 1);
     }
-  },[props.questions.length]);
+  },[questions.length]);
 
-  useEffect(()=>{
+  useEffect(() => {
     // props.getAnswerOptions();
-    if(props.answerOptions !==0){
-      let shuffledAnswerOptions = shuffleArray(props.answerOptions);
-      setAnswerOptions(shuffledAnswerOptions);
+    if(answerOptions !== 0){
+      let shuffledAnswerOptions = shuffleArray(answerOptions);
+      setShuffledAnswers(shuffledAnswerOptions);
       console.log(answerOptions)
     }
-  },[props.answerOptions]);
+  },[answerOptions]);
 
   useEffect(()=>{
-    let shuffledAnswerOptions = shuffleArray(props.answerOptions);
+    let shuffledAnswerOptions = shuffleArray(answerOptions);
     // setQuestion(props.questions[questionId].question);
-    setAnswerOptions(shuffledAnswerOptions);
+    setShuffledAnswers(shuffledAnswerOptions);
   },[question])
 
   const handleAnswerSelection = (e) => {
     setAnswer(e.currentTarget.value);
-    props.answerSelected(answer);
-    if (questionId < props.questions.length){
-      setTimeout(() => nextQuestion(), 333)
+    console.log('answer', e.currentTarget.value);
+    answerSelected(e.currentTarget.value);
+    if (questionId < questions.length){
+      setTimeout(() => nextQuestion(), 333);
     } else {
-      setTimeout(()=> props.setResult())
+      setTimeout(() => setResult());
     }
   }
 
   const nextQuestion = () => {
-    let q = props.questions[questionId]
-    props.getAnswerOptions(q.id);
+    let q = questions[questionId];
+    getAnswerOptions(q.id);
     setCount(count + 1);
     setQuestionId(questionId + 1);
     setQuestion(q.question);
     setAnswer('');
-  }
+  };
   
   return (
     <div className="App">
@@ -88,12 +90,12 @@ export default function Main(props) {
       </div>
       <Quiz
         answer={answer}
-        answerOptions={answerOptions}
+        answerOptions={shuffledAnswers}
         questionId={questionId}
         question={question}
-        questionTotal={props.questions.length === 0 ? 'Loading...' : props.questions.length}
+        questionTotal={questions.length === 0 ? 'Loading...' : questions.length}
         onAnswerSelected={handleAnswerSelection}
       />
     </div>
-  )
-}
+  );
+};

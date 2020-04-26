@@ -20,7 +20,7 @@ export default function AnswerOption(props) {
       </label>
     </li>
   );
-}
+};
 
 AnswerOption.propTypes = {
   answer: PropTypes.string.isRequired,
