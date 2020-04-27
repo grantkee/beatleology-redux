@@ -33,12 +33,19 @@ const answerOptions = (state=initialState, action) => {
 const answers = (state=initialState, action) => {
   switch(action.type){
     case 'ANSWER_SELECTED':
-      console.log(action.value)
-      console.log({...state})
       return {...state, [action.value]: (state[action.value] || 0) + 1};
     default:
       return state;
   }
 }
 
-export default combineReducers({user, questions, answerOptions, answers});
+const results = (state=initialState, action) => {
+  switch(action.type){
+    case 'GET_RESULTS':
+      return true;
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({user, questions, answerOptions, answers, results});

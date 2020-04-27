@@ -5,7 +5,7 @@ import Question from './Question';
 import Quiz from './Quiz';
 
 export default function Main(props) {
-  const {getQuizQuestions, getAnswerOptions, questions, answerOptions, answerSelected, setResult} = props;
+  const {getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults} = props;
   const [count, setCount] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
@@ -69,7 +69,8 @@ export default function Main(props) {
     if (questionId < questions.length){
       setTimeout(() => nextQuestion(), 333);
     } else {
-      setTimeout(() => setResult());
+      console.log('answerOptions', answerOptions)
+      setTimeout(() => setResult(getResults()), 333);
     }
   }
 
@@ -81,6 +82,10 @@ export default function Main(props) {
     setQuestion(q.question);
     setAnswer('');
   };
+
+  const setResult = (result) =>{
+    result ? console.log(answers) : console.log('uhhhhhhhhhhhhhhhh')
+  }
   
   return (
     <div className="App">
@@ -88,14 +93,18 @@ export default function Main(props) {
         <img src={logo} className="App-logo" alt="logo"/>
         <h2 className="App-header">Beatleology Quiz</h2>
       </div>
-      <Quiz
-        answer={answer}
-        answerOptions={shuffledAnswers}
-        questionId={questionId}
-        question={question}
-        questionTotal={questions.length === 0 ? 'Loading...' : questions.length}
-        onAnswerSelected={handleAnswerSelection}
-      />
+      { result ?       
+        <Quiz
+          answer={answer}
+          answerOptions={shuffledAnswers}
+          questionId={questionId}
+          question={question}
+          questionTotal={questions.length === 0 ? 'Loading...' : questions.length}
+          onAnswerSelected={handleAnswerSelection}
+        />
+        :
+        <Result result={result} />
+      }
     </div>
   );
 };

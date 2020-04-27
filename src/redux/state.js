@@ -5,5 +5,6 @@ export default {
   },
   questions: [],
   answerOptions: [],
-  answers: {}
+  answers: {},
+  results: {}
 }

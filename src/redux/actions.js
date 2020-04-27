@@ -33,7 +33,6 @@ export const answerSelected = answer => ({
   value: answer
 });
 
-export const getResult = result => ({
-  type: 'GET_RESULT',
-  value: result
+export const getResults = () => ({
+  type: 'GET_RESULTS'
 })
