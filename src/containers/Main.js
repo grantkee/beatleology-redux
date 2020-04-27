@@ -5,7 +5,8 @@ import {getQuizQuestions, getAnswerOptions, answerSelected, getResults} from '..
 const mapStateToProps = state => ({
   questions: state.questions,
   answerOptions: state.answerOptions,
-  answers: state.answers
+  answers: state.answers,
+  result: state.result
 });
 
 const mapDispatchToProps = dispatch => ({

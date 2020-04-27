@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../logo.svg';
 //import quiz components
-import Question from './Question';
+import Result from './Result';
 import Quiz from './Quiz';
 
 export default function Main(props) {
-  const {getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults} = props;
+  const {getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults, result} = props;
   const [count, setCount] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
-  let result = '';
 
   const shuffleArray = arr => {
     let currentIndex = arr.length;
