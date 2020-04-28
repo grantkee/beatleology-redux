@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../logo.svg';
 //import quiz components
-import Result from './Result';
+import Results from './Results';
 import Quiz from './Quiz';
 
 export default function Main(props) {
-  const {getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults, result} = props;
+  const {getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults, results} = props;
   const [count, setCount] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
@@ -92,7 +92,7 @@ export default function Main(props) {
         <img src={logo} className="App-logo" alt="logo"/>
         <h2 className="App-header">Beatleology Quiz</h2>
       </div>
-      { result ?       
+      { results ?       
         <Quiz
           answer={answer}
           answerOptions={shuffledAnswers}
@@ -102,7 +102,7 @@ export default function Main(props) {
           onAnswerSelected={handleAnswerSelection}
         />
         :
-        <Result result={result} />
+        <Results results={results} />
       }
     </div>
   );
