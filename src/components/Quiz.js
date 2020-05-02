@@ -1,32 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import List from '@material-ui/core/List';
 import Question from './Question';
 import QuestionCount from './QuestionCount';
 import AnswerOption from './AnswerOption';
 
 export default function Quiz(props) {
+  const {answer, questionId, onAnswerSelected, questionTotal, question, answerOptions} = props;
+
   const renderAnswerOptions = (key) => (
       <AnswerOption
-        key={key.content}
+        key={key.answer_type}
         answerContent={key.content}
         answerType={key.answer_type}
-        answer={props.answer}
-        questionId={props.questionId}
-        onAnswerSelected={props.onAnswerSelected}
+        answer={answer}
+        value={key.answer_type}
+        onAnswerSelected={onAnswerSelected}
         />
     );
 
   return(
     <div className='quiz'>
       <QuestionCount
-        count={props.questionId}
-        total={props.questionTotal}
+        count={questionId}
+        total={questionTotal}
       />
-      <Question content={props.question} />
-      <ul className='answerOptions'>
-        {/* props.renderAnswerOptions created with redux */}
-        {props.answerOptions.map(renderAnswerOptions)}
-      </ul>
+      <Question content={question} />
+      <List>{answerOptions.map(renderAnswerOptions)}</List>
+      {/* <ul className='answerOptions'>
+        
+      </ul> */}
     </div>
   );
 }

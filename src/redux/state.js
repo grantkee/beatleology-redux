@@ -4,7 +4,8 @@ export default {
     isOn: false
   },
   questions: [],
+  questionCount: 0,
   answerOptions: [],
   answers: {},
-  results: {}
+  results: false,
 }

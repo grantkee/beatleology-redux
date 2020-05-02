@@ -12,24 +12,24 @@ export default function Main(props) {
   const [answer, setAnswer] = useState('');
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
-  const shuffleArray = arr => {
-    let currentIndex = arr.length;
-    let tempValue;
-    let randomIndex;
+  // const shuffleArray = arr => {
+  //   let currentIndex = arr.length;
+  //   let tempValue;
+  //   let randomIndex;
 
-    //while there are unshuffled elements
-    while (0 !== currentIndex){
-      //pick a remaining element
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
+  //   //while there are unshuffled elements
+  //   while (0 !== currentIndex){
+  //     //pick a remaining element
+  //     randomIndex = Math.floor(Math.random() * currentIndex);
+  //     currentIndex -= 1;
 
-      //swap with current element
-      tempValue = arr[currentIndex];
-      arr[currentIndex] = arr[randomIndex];
-      arr[randomIndex] = tempValue;
-    }
-    return arr;
-  };
+  //     //swap with current element
+  //     tempValue = arr[currentIndex];
+  //     arr[currentIndex] = arr[randomIndex];
+  //     arr[randomIndex] = tempValue;
+  //   }
+  //   return arr;
+  // };
 
   //get questions
   useEffect(() => {
@@ -46,30 +46,31 @@ export default function Main(props) {
     }
   },[questions.length]);
 
-  useEffect(() => {
-    // props.getAnswerOptions();
-    if(answerOptions !== 0){
-      let shuffledAnswerOptions = shuffleArray(answerOptions);
-      setShuffledAnswers(shuffledAnswerOptions);
-      console.log(answerOptions)
-    }
-  },[answerOptions]);
+  // useEffect(() => {
+  //   // props.getAnswerOptions();
+  //   if(answerOptions !== 0){
+  //     let shuffledAnswerOptions = shuffleArray(answerOptions);
+  //     setShuffledAnswers(shuffledAnswerOptions);
+  //     console.log(answerOptions)
+  //   }
+  // },[answerOptions]);
 
-  useEffect(()=>{
-    let shuffledAnswerOptions = shuffleArray(answerOptions);
-    // setQuestion(props.questions[questionId].question);
-    setShuffledAnswers(shuffledAnswerOptions);
-  },[question])
+  // useEffect(()=>{
+  //   let shuffledAnswerOptions = shuffleArray(answerOptions);
+  //   // setQuestion(props.questions[questionId].question);
+  //   setShuffledAnswers(shuffledAnswerOptions);
+  // },[question]);
 
   const handleAnswerSelection = (e) => {
-    setAnswer(e.currentTarget.value);
-    console.log('answer', e.currentTarget.value);
-    answerSelected(e.currentTarget.value);
+    // debugger;
+    let selection = e.currentTarget.id;
+    setAnswer(selection);
+    answerSelected(selection);
     if (questionId < questions.length){
       setTimeout(() => nextQuestion(), 333);
     } else {
       console.log('answerOptions', answerOptions)
-      setTimeout(() => setResult(getResults()), 333);
+      setTimeout(() => setResult(getResults(answer, answers)), 333);
     }
   }
 
@@ -83,27 +84,31 @@ export default function Main(props) {
   };
 
   const setResult = (result) =>{
-    result ? console.log(answers) : console.log('uhhhhhhhhhhhhhhhh')
+    result ? console.log('set results', answers) : console.log('uhhhhhhhhhhhhhhhh')
   }
-  
+
+  const renderQuiz = () => (
+    <Quiz
+      answer={answer}
+      answerOptions={answerOptions}
+      questionId={questionId}
+      question={question}
+      questionTotal={questions.length === 0 ? 'Loading...' : questions.length}
+      onAnswerSelected={handleAnswerSelection}
+    />
+  );
+
+  const renderResults = () => (
+    <Results results={results} />
+  );
+
   return (
     <div className="App">
       <div>
         <img src={logo} className="App-logo" alt="logo"/>
         <h2 className="App-header">Beatleology Quiz</h2>
       </div>
-      { results ?       
-        <Quiz
-          answer={answer}
-          answerOptions={shuffledAnswers}
-          questionId={questionId}
-          question={question}
-          questionTotal={questions.length === 0 ? 'Loading...' : questions.length}
-          onAnswerSelected={handleAnswerSelection}
-        />
-        :
-        <Results results={results} />
-      }
+      {results ? renderResults() : renderQuiz()}
     </div>
   );
 };

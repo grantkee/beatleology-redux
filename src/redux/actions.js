@@ -19,7 +19,7 @@ export const getAnswerOptions = id => (
       .then(res => res.json())
       .then(response => {
         const action = {
-          type: 'FETCH_ANSWERS',
+          type: 'SHUFFLE_ANSWERS',
           value: response
         }
         dispatch(action)
@@ -27,6 +27,10 @@ export const getAnswerOptions = id => (
     .catch(error => console.log(error));
   }
 );
+
+export const nextQuestion = () => ({
+  type: 'NEXT_QUESTION'
+})
 
 export const answerSelected = answer => ({
   type: 'ANSWER_SELECTED',

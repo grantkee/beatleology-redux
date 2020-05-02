@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 export default function Results(props) {
   return (
   <div>
-    Your inner Beatle: <h1>{props.results}</h1>
+    Your inner Beatle: <h1>results go here</h1>
   </div>
 )}
 
 Results.propTypes = {
-  results: PropTypes.string.isRequired
+  results: PropTypes.array.isRequired
 }
