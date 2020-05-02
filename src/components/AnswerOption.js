@@ -21,8 +21,7 @@ export default function AnswerOption(props) {
 
     setChecked(newChecked);
   };
-  // console.log('answer value', props.value)
-
+  
   return (
     <ListItem dense button onClick={onAnswerSelected} id={answerType} >
       <ListItemIcon>
