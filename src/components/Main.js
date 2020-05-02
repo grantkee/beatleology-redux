@@ -71,8 +71,9 @@ export default function Main(props) {
     if (questionId < questions.length){
       setTimeout(() => nextQuestion(), 333);
     } else {
-      console.log('answer', selection)
-      setTimeout(() => setResult(getResults(selection, answers)), 333);
+      console.log('get results', getResults(selection, answers))
+      getResults(selection, answers);
+      setTimeout(()=>renderResults(), 334);
     }
   }
 
@@ -85,9 +86,9 @@ export default function Main(props) {
     setAnswer('');
   };
 
-  const setResult = (result) =>{
-    renderResults()
-  }
+  // const setResult = (result) =>{
+  //   renderResults()
+  // }
 
   const renderQuiz = () => (
     <Quiz
@@ -100,9 +101,11 @@ export default function Main(props) {
     />
   );
 
-  const renderResults = () => (
-    <Results results={[answers]} />
-  );
+  const renderResults = () => {
+    console.log('results in render',answers)
+    return (
+    <Results results={answers} />
+  )};
 
   return (
     <div className="App">
