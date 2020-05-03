@@ -62,16 +62,13 @@ export default function Main(props) {
   // },[question]);
 
   const handleAnswerSelection = (e) => {
-    // debugger;
     let selection = e.currentTarget.id;
     console.log('answer before set:', answer)
     setAnswer(selection);
-    console.log('answer after set:', answer)
     answerSelected(selection);
     if (questionId < questions.length){
       setTimeout(() => nextQuestion(), 333);
     } else {
-      console.log('get results', getResults(selection, answers))
       getResults(selection, answers);
       setTimeout(()=>renderResults(), 334);
     }
@@ -101,11 +98,9 @@ export default function Main(props) {
     />
   );
 
-  const renderResults = () => {
-    console.log('results in render',answers)
-    return (
+  const renderResults = () => (
     <Results results={answers} />
-  )};
+  );
 
   return (
     <div className="App">

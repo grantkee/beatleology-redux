@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Container from '@material-ui/core/Container';
 import List from '@material-ui/core/List';
 import Question from './Question';
 import QuestionCount from './QuestionCount';
@@ -20,7 +21,7 @@ export default function Quiz(props) {
     );
 
   return(
-    <div className='quiz'>
+    <Container maxWidth='sm'>
       <QuestionCount
         count={questionId}
         total={questionTotal}
@@ -28,9 +29,8 @@ export default function Quiz(props) {
       <Question content={question} />
       <List>{answerOptions.map(renderAnswerOptions)}</List>
       {/* <ul className='answerOptions'>
-        
       </ul> */}
-    </div>
+    </Container>
   );
 }
 

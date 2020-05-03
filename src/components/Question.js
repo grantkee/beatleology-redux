@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 
 export default function Question(props) {
   return (
-    <h6 className="question">{props.content}</h6>
+    <Typography className="question">{props.content}</Typography>
   );
 }
 
