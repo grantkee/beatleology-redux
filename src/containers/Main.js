@@ -6,7 +6,7 @@ const mapStateToProps = state => ({
   questions: state.questions,
   answerOptions: state.answerOptions,
   answers: state.answers,
-  results: state.results
+  resultsReady: state.resultsReady
 });
 
 const mapDispatchToProps = dispatch => ({

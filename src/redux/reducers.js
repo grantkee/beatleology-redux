@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import initialState from './state';
 
-const user = (state=initialState, action) => {
+const user = (state = initialState, action) => {
   switch(action.type) {
     case 'LOGIN':
       return action.value;
@@ -12,7 +12,7 @@ const user = (state=initialState, action) => {
   }
 }
 
-const questions = (state=initialState, action) => {
+const questions = (state = initialState, action) => {
   switch(action.type) {
     case 'FETCH_QUESTIONS':
       return action.value;
@@ -21,7 +21,7 @@ const questions = (state=initialState, action) => {
   }
 }
 
-const questionCount = (state=initialState, action) => {
+const questionCount = (state = initialState, action) => {
   switch(action.type) {
     case 'NEXT_QUESTION':
       return action.value + 1;
@@ -30,7 +30,7 @@ const questionCount = (state=initialState, action) => {
   }
 }
 
-const answerOptions = (state=initialState, action) => {
+const answerOptions = (state = initialState, action) => {
   switch(action.type){
     case 'SHUFFLE_ANSWERS':
       //Fisher-Yates shuffle algorithm
@@ -53,7 +53,7 @@ const answerOptions = (state=initialState, action) => {
   }
 }
 
-const answers = (state=initialState, action) => {
+const answers = (state = initialState, action) => {
   switch(action.type){
     case 'ANSWER_SELECTED':
       return {...state, [action.value]: (state[action.value] || 0) + 1};
@@ -74,7 +74,16 @@ const answers = (state=initialState, action) => {
   }
 }
 
-// const results = (state=initialState, action) => {
+const resultsReady = (state = initialState, action) => {
+  switch(action.type){
+    case 'GET_RESULTS':
+      return action.value;
+    default:
+      return state;
+  }
+}
+
+// const results = (state = initialState, action) => {
 //   switch(action.type){
 //     case 'GET_RESULTS':
 //       console.log('answer', action.answer)
@@ -93,4 +102,4 @@ const answers = (state=initialState, action) => {
 //   }
 // }
 
-export default combineReducers({user, questions, questionCount, answerOptions, answers});
+export default combineReducers({user, questions, questionCount, answerOptions, answers, resultsReady});

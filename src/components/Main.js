@@ -5,7 +5,9 @@ import Results from './Results';
 import Quiz from './Quiz';
 
 export default function Main(props) {
-  const {getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults} = props;
+  const {
+    getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults, resultsReady
+  } = props;
   const [count, setCount] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
@@ -70,7 +72,7 @@ export default function Main(props) {
       setTimeout(() => nextQuestion(), 333);
     } else {
       getResults(selection, answers);
-      setTimeout(()=>renderResults(), 334);
+      // setTimeout(()=>renderResults(), 333);
     }
   }
 
@@ -82,7 +84,7 @@ export default function Main(props) {
     setQuestion(q.question);
     setAnswer('');
   };
-
+console.log('LENGTH:',answers)
   // const setResult = (result) =>{
   //   renderResults()
   // }
@@ -98,9 +100,11 @@ export default function Main(props) {
     />
   );
 
-  const renderResults = () => (
+  const renderResults = () => {
+    debugger;
+    return (
     <Results results={answers} />
-  );
+  )};
 
   return (
     <div className="App">
@@ -108,7 +112,7 @@ export default function Main(props) {
         <img src={logo} className="App-logo" alt="logo"/>
         <h2 className="App-header">Beatleology Quiz</h2>
       </div>
-      {answers.length === 5 ? renderResults() : renderQuiz()}
+      {resultsReady ? renderResults() : renderQuiz()}
     </div>
   );
 };

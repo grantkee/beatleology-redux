@@ -6,5 +6,6 @@ export default {
   questions: [],
   questionCount: 0,
   answerOptions: [],
-  answers: {}
+  answers: {},
+  resultsReady: false
 }
