@@ -14,25 +14,6 @@ export default function Main(props) {
   const [answer, setAnswer] = useState('');
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
-  // const shuffleArray = arr => {
-  //   let currentIndex = arr.length;
-  //   let tempValue;
-  //   let randomIndex;
-
-  //   //while there are unshuffled elements
-  //   while (0 !== currentIndex){
-  //     //pick a remaining element
-  //     randomIndex = Math.floor(Math.random() * currentIndex);
-  //     currentIndex -= 1;
-
-  //     //swap with current element
-  //     tempValue = arr[currentIndex];
-  //     arr[currentIndex] = arr[randomIndex];
-  //     arr[randomIndex] = tempValue;
-  //   }
-  //   return arr;
-  // };
-
   //get questions
   useEffect(() => {
       getQuizQuestions();
@@ -84,7 +65,6 @@ export default function Main(props) {
     setQuestion(q.question);
     setAnswer('');
   };
-console.log('LENGTH:',answers)
   // const setResult = (result) =>{
   //   renderResults()
   // }
@@ -100,11 +80,9 @@ console.log('LENGTH:',answers)
     />
   );
 
-  const renderResults = () => {
-    debugger;
-    return (
+  const renderResults = () => (
     <Results results={answers} />
-  )};
+  );
 
   return (
     <div className="App">
