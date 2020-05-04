@@ -81,7 +81,7 @@ export default function Main(props) {
   );
 
   const renderResults = () => (
-    <Results results={answers} />
+    <Results results={answers} quizLength={question.length} />
   );
 
   return (
@@ -90,7 +90,7 @@ export default function Main(props) {
         <img src={logo} className="App-logo" alt="logo"/>
         <h2 className="App-header">Beatleology Quiz</h2>
       </div>
-      {resultsReady ? renderResults() : renderQuiz()}
+      {questionId == 2 ? renderResults() : renderQuiz()}
     </div>
   );
 };
