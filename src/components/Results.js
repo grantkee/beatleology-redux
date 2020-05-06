@@ -18,10 +18,10 @@ export default function Results(props) {
   debugger;
   return (
   <div>
-    Your inner Beatle: {keys.map(x => <h1 key={x}>{x}</h1> + ' : ' + <h2>{results}</h2>)}
+    Your inner Beatle: {keys.map(x => <h1 key={x}>{x}</h1> + ' : ' + <h2>{results[x]}</h2>)}
   </div>
 )}
 
 Results.propTypes = {
-  results: PropTypes.object.isRequired
+  results: PropTypes.object.isRequired  
 }

@@ -90,7 +90,7 @@ export default function Main(props) {
         <img src={logo} className="App-logo" alt="logo"/>
         <h2 className="App-header">Beatleology Quiz</h2>
       </div>
-      {questionId == 2 ? renderResults() : renderQuiz()}
+      {questionId == 5 ? renderResults() : renderQuiz()}
     </div>
   );
 };
