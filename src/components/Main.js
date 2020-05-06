@@ -48,12 +48,12 @@ export default function Main(props) {
     let selection = e.currentTarget.id;
     console.log('answer before set:', answer);
     setAnswer(selection);
-    answerSelected(selection);
     if (questionId < questions.length){
+      answerSelected(selection);
       // setTimeout(() => nextQuestion(), 333);
       nextQuestion();
     } else {
-      getResults();
+      getResults(questions.length);
       // setTimeout(()=>renderResults(), 333);
     }
   }
@@ -82,7 +82,7 @@ export default function Main(props) {
   );
 
   const renderResults = () => (
-    <Results results={answers} quizLength={question.length} />
+    <Results results={answers} />
   );
 
   return (
@@ -91,7 +91,7 @@ export default function Main(props) {
         <img src={logo} className="App-logo" alt="logo"/>
         <h2 className="App-header">Beatleology Quiz</h2>
       </div>
-      {questionId == 5 ? renderResults() : renderQuiz()}
+      {resultsReady ? renderResults() : renderQuiz()}
     </div>
   );
 };

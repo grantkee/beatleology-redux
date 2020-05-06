@@ -31,11 +31,11 @@ const questionCount = (state = initialState, action) => {
 }
 
 const answerOptions = (state = initialState, action) => {
+  console.log('start array:',action.value)
   switch(action.type){
     case 'SHUFFLE_ANSWERS':
       //Fisher-Yates shuffle algorithm
       let arr = action.value;
-      console.log('start array:',arr)
       let currentIndex = arr.length;
       let tempValue;
       let randomIndex;
@@ -59,6 +59,9 @@ const answers = (state = initialState, action) => {
       return {...state, [action.value]: (state[action.value] || 0) + 1};
     case 'GET_RESULTS':
       let answers = {...state}
+      for (let i in answers){
+          answers[i] = (answers[i] / action.total * 100).toFixed(2) + '%';
+        }
       return answers;
     default:
       return state;

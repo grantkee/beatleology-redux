@@ -37,7 +37,8 @@ export const answerSelected = answer => ({
   value: answer
 });
 
-export const getResults = () => ({
+export const getResults = (total) => ({
   type: 'GET_RESULTS',
-  value: true
+  value: true,
+  total: total
 });
