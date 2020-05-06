@@ -59,15 +59,6 @@ const answers = (state = initialState, action) => {
       return {...state, [action.value]: (state[action.value] || 0) + 1};
     case 'GET_RESULTS':
       let answers = {...state}
-      // let keys = Object.keys(answers);
-      // let obj = keys.map(key => answers[key])
-      // console.log('answers', answers)
-      // console.log('keys',keys)
-      // console.log('obj', obj)
-      // let max = Math.max.apply(null, obj);
-      // console.log('max', max);
-      // let results = keys.filter(key => answers[key] === max);
-      // console.log('results', results);
       return answers;
     default:
       return state;

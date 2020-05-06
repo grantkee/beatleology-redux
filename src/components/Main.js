@@ -46,13 +46,14 @@ export default function Main(props) {
 
   const handleAnswerSelection = (e) => {
     let selection = e.currentTarget.id;
-    console.log('answer before set:', answer)
+    console.log('answer before set:', answer);
     setAnswer(selection);
     answerSelected(selection);
     if (questionId < questions.length){
-      setTimeout(() => nextQuestion(), 333);
+      // setTimeout(() => nextQuestion(), 333);
+      nextQuestion();
     } else {
-      getResults(selection, answers);
+      getResults();
       // setTimeout(()=>renderResults(), 333);
     }
   }
