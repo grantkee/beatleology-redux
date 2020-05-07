@@ -12,7 +12,6 @@ export default function Main(props) {
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
-  const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
   //get questions
   useEffect(() => {
