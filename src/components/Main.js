@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../logo.svg';
+import Header from './Header';
 //import quiz components
 import Results from './Results';
 import Quiz from './Quiz';
@@ -85,10 +85,7 @@ export default function Main(props) {
 
   return (
     <div className="App">
-      <div>
-        <img src={logo} className="App-logo" alt="logo"/>
-        <h2 className="App-header">Beatleology Quiz</h2>
-      </div>
+      <Header />
       {resultsReady ? renderResults() : renderQuiz()}
     </div>
   );
