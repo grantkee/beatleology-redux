@@ -46,7 +46,6 @@ export default function Main(props) {
 
   const handleAnswerSelection = (e) => {
     let selection = e.currentTarget.id;
-    console.log('answer before set:', answer);
     setAnswer(selection);
     if (questionId < questions.length){
       answerSelected(selection);

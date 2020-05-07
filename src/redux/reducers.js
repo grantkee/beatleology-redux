@@ -31,7 +31,6 @@ const questionCount = (state = initialState, action) => {
 }
 
 const answerOptions = (state = initialState, action) => {
-  console.log('start array:',action.value)
   switch(action.type){
     case 'SHUFFLE_ANSWERS':
       //Fisher-Yates shuffle algorithm
@@ -46,7 +45,6 @@ const answerOptions = (state = initialState, action) => {
         arr[currentIndex] = arr[randomIndex];
         arr[randomIndex] = tempValue;
       }
-      console.log('end array', arr);
       return arr;
     default:
       return state;
