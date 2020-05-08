@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const logger = (req, res, next) => {
-  console.log(`route: ${req.url} - ${new Date().toISOString()}`)
+  console.log(`route: ${req.url} - ${new Date().toISOString()}`);
   next()
 }
 
@@ -23,7 +23,7 @@ const authenticate = (req, res, next) => {
       res.sendStatus(400)
     }
   });
-}
+};
 
 module.exports = {
   logger,
