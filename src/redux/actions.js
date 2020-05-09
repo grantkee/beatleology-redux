@@ -1,3 +1,43 @@
+export const signup = (data) => (
+  dispatch => {
+    fetch('/auth/signup', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/javascript'},
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(response => {
+      const action = {
+        type: 'SIGNUP',
+        value: response
+      }
+      dispatch(action)
+    })
+    .catch(error => console.log('SIGNUP ERROR:', error))
+  }
+)
+
+export const login = (data) => (
+  dispatch => {
+    fetch('/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type:': 'application/javascript'},
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(response => {
+      const action = {
+        type: 'LOGIN',
+        username: data.username,
+        value: true
+      }
+      console.log(response);
+      dispatch(action);
+    })
+    .catch(error => console.log('LOGIN ERROR:', error));
+  }
+);
+
 export const getQuizQuestions = () => (
   dispatch => {
     fetch('/quiz')
@@ -9,7 +49,7 @@ export const getQuizQuestions = () => (
         }
         dispatch(action)
       })
-    .catch(error => console.log(error));
+    .catch(error => console.log('q', error));
   }
 );
 
@@ -24,7 +64,7 @@ export const getAnswerOptions = id => (
         }
         dispatch(action)
       })
-    .catch(error => console.log(error));
+    .catch(error => console.log('a', error));
   }
 );
 

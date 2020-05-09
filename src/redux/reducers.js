@@ -4,7 +4,7 @@ import initialState from './state';
 const user = (state = initialState, action) => {
   switch(action.type) {
     case 'LOGIN':
-      return action.value;
+      return {username: action.username, isOn: action.value};
     case 'LOGOUT':
       return action.value;
     default:

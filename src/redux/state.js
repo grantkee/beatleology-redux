@@ -1,6 +1,6 @@
 export default {
   user: {
-    email: '',
+    username: '',
     isOn: false
   },
   questions: [],
@@ -8,4 +8,4 @@ export default {
   answerOptions: [],
   answers: {},
   resultsReady: false
-}
+};
