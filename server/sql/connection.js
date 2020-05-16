@@ -14,12 +14,12 @@ class Connection {
         database: process.env.SQL_DB,
         port: process.env.SQL_PORT,
         multipleStatements: process.env.SQL_MS,
-      })
-      return this.pool
+      });
+      return this.pool;
     }
-    return this.pool
-  }
-}
+    return this.pool;
+  };
+};
 
 const instance = new Connection();
 
