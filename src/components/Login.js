@@ -47,7 +47,7 @@ export default function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('creds', credentials)
+    // debugger;
     login(credentials);
   }
 
@@ -88,10 +88,8 @@ export default function Login(props) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Link to='/'>
             <Button
               type="submit"
-              onClick={props.login}
               fullWidth
               variant="contained"
               color="primary"
@@ -99,7 +97,6 @@ export default function Login(props) {
             >
               Sign In
             </Button>
-          </Link>
           <Grid container>
             <Grid item xs>
               <Link to='/'>

@@ -19,12 +19,11 @@ export const signup = (data) => (
 
 export const login = (data) => (
   dispatch => {
-    const dat = data;
     debugger;
     fetch('/auth/login', {
       method: 'POST',
       headers: {'Content-Type:': 'application/javascript'},
-      body: JSON.stringify(dat)
+      body: JSON.stringify(data)
     })
     .then(res => res.json())
     .then(response => {
