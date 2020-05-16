@@ -26,6 +26,9 @@ const signup = (req, res) => {
 
 const login = (req, res) => {
   const {email, password} = req.body;
+  console.log('login hit', req.body);
+  console.log('email', email);
+  console.log('pword', password);
   let sql = 'SELECT * FROM usersCredentials WHERE email = ?';
   sql = mysql.format(sql, [email]);
 

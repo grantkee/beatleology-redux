@@ -8,7 +8,7 @@ export default function Router() {
   return (
     <Switch>
       <Route path='/signup' component={Signup} />
-      <Route path='/login' component={Login} />
+      <Route path='/auth/login' component={Login} />
       <Route exact path='/' component={Main} />
     </Switch>
   )
