@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Login(props) {
   const classes = useStyles();
   const { user, login } = props;
-  console.log('user', user)
 
   const [credentials, setCredentials] = useState({});
 
@@ -48,11 +47,9 @@ export default function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('creds', credentials)
     login(credentials);
   }
-
-  console.log('user:', user);
-  console.log('creds', credentials);
 
   return (
     <Container component="main" maxWidth="xs">
