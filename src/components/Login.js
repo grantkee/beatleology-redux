@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Copyright from './Copyright';
 import {Link} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
@@ -39,10 +39,20 @@ export default function Login(props) {
   const { user, login } = props;
   console.log('user', user)
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [credentials, setCredentials] = useState({});
+
+  const handleChange = (e) => {
+    e.persist();
+    setCredentials(credentials => ({...credentials, [e.target.name]: e.target.value}));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(credentials);
+  }
 
   console.log('user:', user);
+  console.log('creds', credentials);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -54,17 +64,17 @@ export default function Login(props) {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} noValidate onSubmit={() => login(user)}>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address or Username"
+            label="Email Address"
             name="email"
-            autoComplete="email"
             autoFocus
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -75,7 +85,7 @@ export default function Login(props) {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            onChange={handleChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

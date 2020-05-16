@@ -25,18 +25,18 @@ const signup = (req, res) => {
 };
 
 const login = (req, res) => {
-  const {username, password} = req.body;
-  let sql = 'SELECT * FROM usersCredentials WHERE username = ?';
-  sql = mysql.format(sql, [username]);
+  const {email, password} = req.body;
+  let sql = 'SELECT * FROM usersCredentials WHERE email = ?';
+  sql = mysql.format(sql, [email]);
 
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
-    if (!rows.length) return res.status(400).send('Incorrect username or password');
+    if (!rows.length) return res.status(400).send('Incorrect email or password');
 
     const hash = rows[0].password;
     bcrypt.compare(password, hash)
       .then(result => {
-        if (!result) return res.status(400).send('Incorrect username or password');
+        if (!result) return res.status(400).send('Incorrect email or password');
         const data = {...rows[0]};
         data.password = 'REDACTED';
     
