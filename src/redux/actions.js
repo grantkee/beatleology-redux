@@ -19,11 +19,9 @@ export const signup = (data) => (
 
 export const login = (data) => (
   dispatch => {
-    console.log('stringify', JSON.stringify(data))
-    debugger;
     fetch('/auth/login', {
       method: 'POST',
-      headers: {'Content-Type': 'application/javascript'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
     })
     // .then(res => res.json())
