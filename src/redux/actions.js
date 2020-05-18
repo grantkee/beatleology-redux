@@ -31,7 +31,7 @@ export const login = (data) => (
         type: 'LOGIN',
         username: data.username,
         value: true,
-        token: response
+        token: response.token
       }
       console.log(response);
       dispatch(action);

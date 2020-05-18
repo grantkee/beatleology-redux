@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Copyright from './Copyright';
-import {Link} from 'react-router-dom';
+import {Link, BrowserRouter} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useRadioGroup } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login(props) {
   const classes = useStyles();
-  const {login} = props;
+  const {login, user} = props;
 
   const [credentials, setCredentials] = useState({});
 
@@ -48,6 +49,9 @@ export default function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(credentials);
+    if(user.isOn){
+      browser.push('/');
+    }
   };
 
   return (
