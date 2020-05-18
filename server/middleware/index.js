@@ -7,11 +7,12 @@ const logger = (req, res, next) => {
 
 const authenticate = (req, res, next) => {
   let header = req.headers['auth'];
+  console.log('header hit', header)
   if(!header) return res.status(400).send('Invalid credentials. Please login')
-  console.log('header', header);
+  console.log('header again', header);
   let token = header.split(' ')[1];
 
-  console.log('auth happening', token)
+  console.log('auth happening with token:', token)
 
   jwt.verify(token, 'secret', (error, decoded) => {
     console.log('decoded', decoded)

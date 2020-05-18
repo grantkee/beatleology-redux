@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import Copyright from './Copyright';
 import {Link} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
@@ -36,20 +36,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login(props) {
   const classes = useStyles();
-  const { user, login } = props;
+  const {login} = props;
 
   const [credentials, setCredentials] = useState({});
 
   const handleChange = (e) => {
     e.persist();
-    setCredentials(credentials => ({...credentials, [e.target.name]: e.target.value}));
+    setCredentials(creds => ({...creds, [e.target.name]: e.target.value}));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // debugger;
     login(credentials);
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">

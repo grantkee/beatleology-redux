@@ -2,7 +2,7 @@ export const signup = (data) => (
   dispatch => {
     fetch('/auth/signup', {
       method: 'POST',
-      headers: {'Content-Type': 'application/javascript'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
     })
     .then(res => res.json())
@@ -30,7 +30,8 @@ export const login = (data) => (
       const action = {
         type: 'LOGIN',
         username: data.username,
-        value: true
+        value: true,
+        token: response
       }
       console.log(response);
       dispatch(action);

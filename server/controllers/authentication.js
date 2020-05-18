@@ -9,6 +9,7 @@ const saltRounds = 10;
 
 const signup = (req, res) => {
   const {firstName, lastName, username, email, password} = req.body;
+  console.log('body', req.body);
   let sql = "BEGIN; INSERT INTO users (first_name, last_name) VALUES (?, ?); INSERT INTO usersCredentials (id, username, email, password) VALUES (LAST_INSERT_ID(), ?, ?, ?); COMMIT;"
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
