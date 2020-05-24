@@ -1,8 +1,11 @@
+require('dotenv').config();
+
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const pool = require('../sql/connection');
 const {handleSQLError} = require('../sql/error');
+const accessTokenSecret = process.env.JWT_SECRET;
 
 //use bcrypt
 const saltRounds = 10;
@@ -38,12 +41,24 @@ const login = (req, res) => {
     bcrypt.compare(password, hash)
       .then(result => {
         if (!result) return res.status(400).send('Incorrect email or password');
-        const data = {...rows[0]};
+        console.log('ROWS[0] = ', rows[0]);
+        const data = {
+          ...rows[0],
+          iat: Math.floor(Date.now() / 1000) - 30,
+          exp: Math.floor(Date.now() / 1000) + (60 * 60)
+        };
         data.password = 'REDACTED';
+        console.log('data?', data);
     
-        const token  = jwt.sign(data, 'secret');
+        const token = jwt.sign(data, accessTokenSecret, (err, user) => {
+          if (!err){
+            console.log('user: ', user);
+          } else {
+            return res.status(403).send('Incorrect email or password');
+          }
+        });
         res.json({
-          message: 'login successful',
+          message: 'login successful - proud of you',
           token
         });
       });

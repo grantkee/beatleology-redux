@@ -7,8 +7,10 @@ const {logger} = require('./middleware');
 const app = express();
 const port = process.env.PORT || 3333;
 
+//tools
 app.use(bodyParser.json());
 app.use(logger);
+
 //Routes
 app.use('/quiz', quizRouter);
 app.use('/auth', authRouter)

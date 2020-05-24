@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Copyright from './Copyright';
-import {Link, BrowserRouter} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -49,9 +49,11 @@ export default function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(credentials);
-    if(user.isOn){
-      browser.push('/');
-    }
+    // let history = history();
+    
+    // if(user.isOn){
+    //   history.push('/');
+    // }
   };
 
   return (

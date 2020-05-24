@@ -1,6 +1,6 @@
 const express = require('express');
 const quizController = require('../controllers/quiz');
-const authenticate = require('../middleware');
+const {authenticate} = require('../middleware');
 const router = express.Router();
 
 //get all questions
