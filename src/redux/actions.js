@@ -1,9 +1,9 @@
-export const signup = (data) => (
+export const signup = (info) => (
   dispatch => {
     fetch('/auth/signup', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
+      body: JSON.stringify(info)
     })
     .then(res => res.json())
     .then(response => {
@@ -11,18 +11,19 @@ export const signup = (data) => (
         type: 'SIGNUP',
         value: response
       }
-      dispatch(action)
+      console.log('Response', response);
+      dispatch(action);
     })
     .catch(error => console.log('SIGNUP ERROR:', error))
   }
 );
 
-export const login = (data) => (
+export const login = (creds) => (
   dispatch => {
     fetch('/auth/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
+      body: JSON.stringify(creds)
     })
     .then(res => res.json())
     .then(response => {

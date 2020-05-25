@@ -3,11 +3,13 @@ import initialState from './state';
 
 const user = (state = initialState, action) => {
   switch(action.type) {
+    case 'SIGNUP':
+      return {...state, signup: true};
     case 'LOGIN':
-      debugger;
-      return {username: action.username, isOn: action.value}
+      return {username: action.username, isOn: action.value, signup: false};
     case 'LOGOUT':
-      return action.value;
+      localStorage.removeItem('token');
+      return {initialState};
     default:
       return state;
   }

@@ -59,7 +59,7 @@ export default function Login(props) {
     if(isOn) return setUserAuthorized(true);
   }, [user])
   
-  if(userAuthorized) return <Redirect to='/' />
+  if(userAuthorized) return <Redirect to='/quiz' />
 
   return (
     <Container component="main" maxWidth="xs">

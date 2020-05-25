@@ -21,11 +21,15 @@ const signup = (req, res) => {
     sql = mysql.format(sql, [firstName, lastName, username, email, hash]);
 
     pool.query(sql, (err, results) => {
-      if (err){
+      console.log('callback function in controller for signup 333')
+      if (!err){
+        console.log('no error')
+        return res.send('Signup Successful!');
+      } else {
+        console.log('hitting error', err)
         if (err.code === 'ER_DUP_ENTRY') return res.status(400).send('Sorry, that username is unavailable');
         return handleSQLError(res, err);
       }
-      return res.send('Signup Successful!');
     });
   });
 };

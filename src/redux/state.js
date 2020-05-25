@@ -2,6 +2,7 @@ export default {
   user: {
     username: '',
     isOn: false,
+    signup: false,
   },
   questions: [],
   questionCount: 0,

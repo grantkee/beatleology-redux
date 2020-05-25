@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Header from './Header';
 //import quiz components
 import Results from './Results';
@@ -12,8 +13,6 @@ export default function Main(props) {
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
-
-  console.log('USER: ', user)
 
   //get questions
   useEffect(() => {
@@ -82,7 +81,7 @@ export default function Main(props) {
   );
 
   const renderResults = () => (
-    <Results results={answers} />
+    <Results results={answers} user={user.username} />
   );
 
   return (
@@ -92,3 +91,15 @@ export default function Main(props) {
     </div>
   );
 };
+
+Results.propTypes = {
+  user: PropTypes.object.isRequired,
+  getQuizQuestions: PropTypes.func.isRequired,
+  getAnswerOptions: PropTypes.func.isRequired,
+  questions: PropTypes.array.isRequired,
+  answerOptions: PropTypes.array.isRequired,
+  answers: PropTypes.object.isRequired,
+  answerSelected: PropTypes.object.isRequired,
+  getResults: PropTypes.func.isRequired,
+  resultsReady: PropTypes.bool.isRequired
+}
