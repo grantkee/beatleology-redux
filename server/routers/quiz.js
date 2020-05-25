@@ -1,12 +1,12 @@
 const express = require('express');
 const quizController = require('../controllers/quiz');
-const {authenticate} = require('../middleware');
+const {authenticateJWT} = require('../middleware');
 const router = express.Router();
 
 //get all questions
-router.get('/', authenticate, quizController.getQuestions);
+router.get('/', authenticateJWT, quizController.getQuestions);
 
 //get answer options by question id
-router.get('/:id', authenticate, quizController.getAnswers);
+router.get('/:id', authenticateJWT, quizController.getAnswers);
 
 module.exports = router;

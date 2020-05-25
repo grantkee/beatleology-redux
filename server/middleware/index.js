@@ -7,12 +7,12 @@ const logger = (req, res, next) => {
   next();
 }
 
-const authenticate = (req, res, next) => {
-  let header = req.headers['auth'];
-  console.log('header hit', header)
-  if(!header) return res.status(400).send('Invalid credentials. Please login')
-  console.log('header again', header);
-  let token = header.split(' ')[1];
+const authenticateJWT = (req, res, next) => {
+  let authHeader = req.headers.authorization;
+  console.log('authHeader hit', authHeader)
+  if(!authHeader) return res.status(400).send('Invalid credentials. Please login')
+  console.log('authHeader again', authHeader);
+  let token = authHeader.split(' ')[1];
 
   console.log('auth happening with token:', token);
 
@@ -34,5 +34,5 @@ const authenticate = (req, res, next) => {
 
 module.exports = {
   logger,
-  authenticate
+  authenticateJWT
 };

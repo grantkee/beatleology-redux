@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 const Header = React.memo(() => (
     <div>
-      <Link to='/auth/signup'><img src={logo} className="App-logo" alt="logo"/></Link>
+      <Link to='/signup'><img src={logo} className="App-logo" alt="logo"/></Link>
       <h2 className="App-header">Beatleology Quiz</h2>
       <Copyright />
   </div>

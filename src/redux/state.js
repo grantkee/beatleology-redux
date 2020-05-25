@@ -1,7 +1,7 @@
 export default {
   user: {
     username: '',
-    isOn: false
+    isOn: false,
   },
   questions: [],
   questionCount: 0,

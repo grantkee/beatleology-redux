@@ -4,19 +4,28 @@ import cookie from 'cookie';
 import Main from './containers/Main';
 import Signup from './containers/Signup'; 
 import Login from './containers/Login';
-import { checkPropTypes } from 'prop-types';
 
 const checkAuth = () => {
   const cookies = cookie.parse(document.cookie);
-  return cookies['auth'] ? true : false;
+  return cookies['token'] ? true : false;
 }
 
 const ProtectedRoute = ({component: Component, ...rest}) => (
   <Route
     {...rest}
-    render={props => checkAuth() ? <Component {...props} /> : <Redirect to='login' />}
+    render={props => 
+      checkAuth() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect 
+          to={{
+            pathname: '/login',
+            state: {from: props.location}
+          }}
+        />
+      )}
     />
-)
+);
 
 export default function Router() {
   return (

@@ -3,6 +3,7 @@ import Main from '../components/Main';
 import {getQuizQuestions, getAnswerOptions, answerSelected, getResults} from '../redux/actions';
 
 const mapStateToProps = state => ({
+  user: state.user,
   questions: state.questions,
   answerOptions: state.answerOptions,
   answers: state.answers,

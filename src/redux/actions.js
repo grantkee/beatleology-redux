@@ -15,7 +15,7 @@ export const signup = (data) => (
     })
     .catch(error => console.log('SIGNUP ERROR:', error))
   }
-)
+);
 
 export const login = (data) => (
   dispatch => {
@@ -24,25 +24,31 @@ export const login = (data) => (
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
     })
-    // .then(res => res.json())
-    .then(res => res.text())
+    .then(res => res.json())
     .then(response => {
       const action = {
         type: 'LOGIN',
-        username: data.username,
+        username: response.data.username,
         value: true,
-        token: response.token
       }
       console.log(response);
       dispatch(action);
+      localStorage.setItem('token', response.accessToken);
+      // document.cookie = `token=${response.accessToken};`;
     })
     .catch(error => console.log('LOGIN ERROR:', error));
   }
 );
 
-export const getQuizQuestions = () => (
-  dispatch => {
-    fetch('/quiz')
+export const getQuizQuestions = () => {
+  let token = localStorage.getItem('token');
+  return (
+    dispatch => {
+      fetch('/quiz', {
+        headers: {
+          'Authorization': 'BEARER ' + token
+        }
+      })
       .then(res => res.json())
       .then(response => {
         const action = {
@@ -51,13 +57,20 @@ export const getQuizQuestions = () => (
         }
         dispatch(action)
       })
-    .catch(error => console.log('q', error));
-  }
-);
+      .catch(error => console.log('q', error));
+    }
+  )
+};
 
-export const getAnswerOptions = id => (
-  dispatch => {
-    fetch(`/quiz/${id}`)
+export const getAnswerOptions = id => {
+  let token = localStorage.getItem('token');
+  return (
+    dispatch => {
+      fetch(`/quiz/${id}`,{
+        headers: {
+          'Authorization': 'BEARER ' + token
+        }
+      })
       .then(res => res.json())
       .then(response => {
         const action = {
@@ -66,13 +79,14 @@ export const getAnswerOptions = id => (
         }
         dispatch(action)
       })
-    .catch(error => console.log('a', error));
-  }
-);
+      .catch(error => console.log('a', error));
+    }
+  )
+};
 
 export const nextQuestion = () => ({
   type: 'NEXT_QUESTION'
-})
+});
 
 export const answerSelected = answer => ({
   type: 'ANSWER_SELECTED',

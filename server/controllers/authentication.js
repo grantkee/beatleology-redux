@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const pool = require('../sql/connection');
 const {handleSQLError} = require('../sql/error');
 const accessTokenSecret = process.env.JWT_SECRET;
+// const refreshTokenSecret = process.env.JWT_REFRESH_SECRET;
+// const refreshTokens = [];
 
 //use bcrypt
 const saltRounds = 10;
@@ -30,6 +32,7 @@ const signup = (req, res) => {
 
 const login = (req, res) => {
   const {email, password} = req.body;
+  console.log('Req body', req.body);
   let sql = 'SELECT * FROM usersCredentials WHERE email = ?';
   sql = mysql.format(sql, [email]);
 
@@ -39,29 +42,27 @@ const login = (req, res) => {
 
     const hash = rows[0].password;
     bcrypt.compare(password, hash)
-      .then(result => {
-        if (!result) return res.status(400).send('Incorrect email or password');
-        console.log('ROWS[0] = ', rows[0]);
-        const data = {
-          ...rows[0],
-          iat: Math.floor(Date.now() / 1000) - 30,
-          exp: Math.floor(Date.now() / 1000) + (60 * 60)
-        };
-        data.password = 'REDACTED';
-        console.log('data?', data);
-    
-        const token = jwt.sign(data, accessTokenSecret, (err, user) => {
-          if (!err){
-            console.log('user: ', user);
-          } else {
-            return res.status(403).send('Incorrect email or password');
-          }
-        });
-        res.json({
-          message: 'login successful - proud of you',
-          token
-        });
+    .then(result => {
+      if (!result) return res.status(400).send('Incorrect email or password');
+      const data = {
+        ...rows[0],
+        iat: Math.floor(Date.now() / 1000) - 30,
+        exp: Math.floor(Date.now() / 1000) + (60 * 60)
+      };
+      data.password = 'REDACTED';
+  
+      const accessToken = jwt.sign(data, accessTokenSecret);
+      // const refreshToken = jwt.sign(data, accessTokenSecret);
+
+      // refreshTokens.push(refreshToken);
+
+      res.json({
+        message: 'login successful - proud of you',
+        data: data,
+        accessToken,
+        // refreshToken,
       });
+    });
   });
 };
 

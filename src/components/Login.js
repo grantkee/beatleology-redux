@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Copyright from './Copyright';
-import {Link, useHistory} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useRadioGroup } from '@material-ui/core';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,8 +39,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Login(props) {
   const classes = useStyles();
   const {login, user} = props;
+  const {isOn} = user;
 
   const [credentials, setCredentials] = useState({});
+  const [userAuthorized, setUserAuthorized] = useState(false);
 
   const handleChange = (e) => {
     e.persist();
@@ -49,12 +52,14 @@ export default function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(credentials);
-    // let history = history();
-    
-    // if(user.isOn){
-    //   history.push('/');
-    // }
   };
+
+  useEffect(() => {
+    console.log('effect hitting', isOn);
+    if(isOn) return setUserAuthorized(true);
+  }, [user])
+  
+  if(userAuthorized) return <Redirect to='/' />
 
   return (
     <Container component="main" maxWidth="xs">

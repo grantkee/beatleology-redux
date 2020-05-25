@@ -6,12 +6,14 @@ import Quiz from './Quiz';
 
 export default function Main(props) {
   const {
-    getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults, resultsReady
+    user, getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults, resultsReady
   } = props;
   const [count, setCount] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+
+  console.log('USER: ', user)
 
   //get questions
   useEffect(() => {
