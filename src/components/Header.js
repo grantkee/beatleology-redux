@@ -4,17 +4,27 @@ import logo from '../logo.svg';
 import Copyright from './Copyright';
 import Button from '@material-ui/core/Button';
 
-const Header = React.memo(() => (
-    <div>
-      <img src={logo} className="App-logo" alt="logo"/>
-      <h2 className="App-header">Beatleology Quiz</h2>
+const Header = React.memo((props) => {
+  const {user, logout} = props;
+
+  return (
+    <div className="app">
+      <img src={logo} className="app-logo" alt="logo"/>
+      <h2 className="app-header">Beatleology Quiz</h2>
       <div>
-        <Link to='/login'><Button>LOGIN</Button></Link>
-        <Link to='/signup'><Button>SIGN UP</Button></Link>
+        {user.isOn ? (
+          <Link to='/'><Button onClick={() => logout()}>Logout</Button></Link>
+        ) : (
+          <>
+            <Link to='/login'><Button>LOGIN</Button></Link>
+            <Link to='/signup'><Button>SIGN UP</Button></Link>
+          </>
+        )}
       </div>
       <Copyright />
-  </div>
-  )
+    </div>
+    );
+  }
 );
 
 export default Header;

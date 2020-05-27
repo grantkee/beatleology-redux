@@ -9,7 +9,7 @@ const user = (state = initialState, action) => {
       return {username: action.username, isOn: action.value, signup: false};
     case 'LOGOUT':
       localStorage.removeItem('token');
-      return {initialState};
+      return {...state, username: '', isOn: action.value, signup: false};
     default:
       return state;
   }

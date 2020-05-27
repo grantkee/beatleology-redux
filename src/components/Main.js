@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Header from './Header';
+import {Redirect} from 'react-router-dom';
+import Header from '../containers/Header';
 //import quiz components
 import Results from './Results';
 import Quiz from './Quiz';
 
 export default function Main(props) {
   const {
-    user, getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults, resultsReady
+    user, getQuizQuestions, getAnswerOptions, questions, answerOptions, answers, answerSelected, getResults, resultsReady, logout
   } = props;
   const [count, setCount] = useState(1);
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+
+  const {username} = user;
 
   //get questions
   useEffect(() => {
@@ -69,19 +72,27 @@ export default function Main(props) {
   //   renderResults()
   // }
 
-  const renderQuiz = () => (
-    <Quiz
-      answer={answer}
-      answerOptions={answerOptions}
-      questionId={questionId}
-      question={question}
-      questionTotal={questions.length === 0 ? 'Loading...' : questions.length}
-      onAnswerSelected={handleAnswerSelection}
-    />
-  );
+  const renderQuiz = () => {
+    if(!localStorage.getItem('token')){
+      logout();
+    }
+    return (
+      localStorage.getItem('token') ? (
+        <Quiz
+          answer={answer}
+          answerOptions={answerOptions}
+          questionId={questionId}
+          question={question}
+          questionTotal={questions.length === 0 ? 'Loading...' : questions.length}
+          onAnswerSelected={handleAnswerSelection}
+        />
+      ) : (
+        <Redirect to='/' />
+      )
+  )};
 
   const renderResults = () => (
-    <Results results={answers} user={user.username} />
+    <Results results={answers} user={username} />
   );
 
   return (

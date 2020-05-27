@@ -5,7 +5,7 @@ export const signup = (info) => (
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(info)
     })
-    .then(res => res.json())
+    .then(res => res.text())
     .then(response => {
       const action = {
         type: 'SIGNUP',
@@ -32,14 +32,19 @@ export const login = (creds) => (
         username: response.data.username,
         value: true,
       }
-      console.log(response);
-      dispatch(action);
+      console.log('response', response);
       localStorage.setItem('token', response.accessToken);
+      dispatch(action);
       // document.cookie = `token=${response.accessToken};`;
     })
     .catch(error => console.log('LOGIN ERROR:', error));
   }
 );
+
+export const logout = () => ({
+  type: 'LOGOUT',
+  value: false
+});
 
 export const getQuizQuestions = () => {
   let token = localStorage.getItem('token');
