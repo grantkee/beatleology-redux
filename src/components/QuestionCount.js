@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 
 export default function QuestionCount(props) {
+  const {count, total} = props;
   return (
-    <div className="question-count">
-      Question <span>{props.count}</span> of <span>{props.total}</span>
-    </div>
+      <Typography align='center' display='block' variant='subtitle2'>
+        {`Question ${count} of ${total}`}
+      </Typography>
   );
-}
+};
 
 QuestionCount.propTypes = {
   count: PropTypes.number.isRequired,

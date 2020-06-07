@@ -10,7 +10,7 @@ const checkAuth = () => {
   // const cookies = cookie.parse(document.cookie);
   // return cookies['token'] ? true : false;
   return localStorage.getItem('token');
-}
+};
 
 const ProtectedRoute = ({component: Component, ...rest}) => (
   <Route
@@ -35,7 +35,8 @@ export default function Router() {
       <Route path='/signup' component={Signup} />
       <Route path='/login' component={Login} />
       <ProtectedRoute exact path='/quiz' component={Main} />
+      <Route path='/guest' component={Main} />
       <Route path='/' component={Home} />
     </Switch>
-  )
-}
+  );
+};

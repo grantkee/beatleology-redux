@@ -17,7 +17,6 @@ export default function Main(props) {
 
   const {username} = user;
 
-  //get questions
   useEffect(() => {
       getQuizQuestions();
   },[]);
@@ -32,31 +31,16 @@ export default function Main(props) {
     }
   },[questions.length]);
 
-  // useEffect(() => {
-  //   // props.getAnswerOptions();
-  //   if(answerOptions !== 0){
-  //     let shuffledAnswerOptions = shuffleArray(answerOptions);
-  //     setShuffledAnswers(shuffledAnswerOptions);
-  //     console.log(answerOptions)
-  //   }
-  // },[answerOptions]);
-
-  // useEffect(()=>{
-  //   let shuffledAnswerOptions = shuffleArray(answerOptions);
-  //   // setQuestion(props.questions[questionId].question);
-  //   setShuffledAnswers(shuffledAnswerOptions);
-  // },[question]);
 
   const handleAnswerSelection = (e) => {
     let selection = e.currentTarget.id;
     setAnswer(selection);
+
     if (questionId < questions.length){
       answerSelected(selection);
-      // setTimeout(() => nextQuestion(), 333);
       nextQuestion();
     } else {
       getResults(questions.length);
-      // setTimeout(()=>renderResults(), 333);
     }
   }
 
@@ -68,9 +52,6 @@ export default function Main(props) {
     setQuestion(q.question);
     setAnswer('');
   };
-  // const setResult = (result) =>{
-  //   renderResults()
-  // }
 
   const renderQuiz = () => {
     if(!localStorage.getItem('token')){
@@ -113,4 +94,4 @@ Results.propTypes = {
   answerSelected: PropTypes.object.isRequired,
   getResults: PropTypes.func.isRequired,
   resultsReady: PropTypes.bool.isRequired
-}
+};

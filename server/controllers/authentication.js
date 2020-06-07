@@ -35,13 +35,13 @@ const signup = (req, res) => {
 
 const login = (req, res) => {
   const {email, password} = req.body;
-  console.log('Req body', req.body);
   let sql = 'SELECT * FROM usersCredentials WHERE email = ?';
   sql = mysql.format(sql, [email]);
 
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     if (!rows.length) return res.status(400).send('Incorrect email or password');
+    console.log('rows::', rows);
 
     const hash = rows[0].password;
     bcrypt.compare(password, hash)
@@ -53,6 +53,7 @@ const login = (req, res) => {
         exp: Math.floor(Date.now() / 1000) + (60 * 60)
       };
       data.password = 'REDACTED';
+      console.log('data::', data);
   
       const accessToken = jwt.sign(data, accessTokenSecret);
       // const refreshToken = jwt.sign(data, accessTokenSecret);
@@ -69,7 +70,26 @@ const login = (req, res) => {
   });
 };
 
+const guestLogin = (req, res) => {
+ const data = {
+  id: 0,
+  username: 'guest',
+  email: 'guest',
+  password: 'redacted',
+  iat: Math.floor(Date.now() / 1000) - 30,
+  exp: Math.floor(Date.now() / 1000) + (60 * 30)
+ };
+ const accessToken = jwt.sign(data, accessTokenSecret);
+
+ res.json({
+   message: 'welcome guest',
+   data: data,
+   accessToken
+ });
+}
+
 module.exports = {
   signup,
-  login
+  login,
+  guestLogin
 };

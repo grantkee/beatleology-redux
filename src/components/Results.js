@@ -1,4 +1,5 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
 export default function Results(props) {
@@ -6,12 +7,20 @@ export default function Results(props) {
   let keys = Object.keys(results);
 
   return (
-    <div>
-      Congrats, {user}! Your spirit Beatle breakdown: {keys.map(x => <h1 key={x}>{x + ': ' + results[x]}</h1> )}
-    </div>
+    <>
+    <Typography align='center' variant='h3' paragraph>
+      Congrats, {user ? user : 'Guest'}!
+    </Typography>
+    <Typography align='center' variant='h5'>
+      Your spirit Beatle breakdown:
+    </Typography>
+    {keys.map(x => 
+      <Typography key={x} align='center' variant='h6'>{x + ': ' + results[x]}</Typography>
+    )}
+    </>
 )}
 
 Results.propTypes = {
   results: PropTypes.object.isRequired,
   user: PropTypes.string.isRequired
-}
+};

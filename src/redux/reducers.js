@@ -64,6 +64,8 @@ const answers = (state = initialState, action) => {
           answers[i] = (answers[i] / action.total * 100).toFixed(2) + '%';
         }
       return answers;
+    case 'LOGIN':
+        return {}
     default:
       return state;
   }
