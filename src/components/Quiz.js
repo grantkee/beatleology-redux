@@ -9,6 +9,7 @@ import AnswerOption from './AnswerOption';
 export default function Quiz(props) {
   const {answer, questionId, onAnswerSelected, questionTotal, question, answerOptions} = props;
 
+  // shuffled in reducer
   const renderAnswerOptions = (key) => (
       <AnswerOption
         key={key.answer_type}
@@ -28,11 +29,9 @@ export default function Quiz(props) {
       />
       <Question content={question} />
       <List>{answerOptions.map(renderAnswerOptions)}</List>
-      {/* <ul className='answerOptions'>
-      </ul> */}
     </Container>
   );
-}
+};
 
 Quiz.propTypes = {
   questionId: PropTypes.number.isRequired,

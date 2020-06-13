@@ -3,7 +3,8 @@ import Header from '../components/Header';
 import {logout} from '../redux/actions';
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  resultsReady: state.resultsReady
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -52,7 +52,6 @@ export default function SignUp(props) {
   };
 
   useEffect(() => {
-    console.log('effect hitting', user.signup);
     if(user.signup) return setStatus(true);
   }, [user])
 

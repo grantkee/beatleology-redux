@@ -61,11 +61,11 @@ const answers = (state = initialState, action) => {
     case 'GET_RESULTS':
       let answers = {...state}
       for (let i in answers){
-          answers[i] = (answers[i] / action.total * 100).toFixed(2) + '%';
-        }
+        answers[i] = (answers[i] / action.total * 100).toFixed(2) + '%';
+      }
       return answers;
     case 'LOGIN':
-        return {}
+        return {};
     default:
       return state;
   }
@@ -75,28 +75,13 @@ const resultsReady = (state = initialState, action) => {
   switch(action.type){
     case 'GET_RESULTS':
       return action.value;
+    case 'LOGIN':
+      return false;
+    case 'LOGOUT':
+      return false;
     default:
       return state;
   }
 }
-
-// const results = (state = initialState, action) => {
-//   switch(action.type){
-//     case 'GET_RESULTS':
-//       console.log('answer', action.answer)
-//       console.log('answer', action.answers)
-//       console.log('state.answers', answers)
-//       // const answersCount = this.state.answersCount;
-//       // const answersCountKeys = Object.keys(answersCount);
-//       // const answersCountValues = answersCountKeys.map((key) => answersCount[key]);
-//       // const maxAnswerCount = Math.max.apply(null, answersCountValues);
-    
-//       // return answersCountKeys.filter((key) => answersCount[key] === maxAnswerCount);
-//     debugger;
-//       return [];
-//     default:
-//       return state;
-//   }
-// }
 
 export default combineReducers({user, questions, questionCount, answerOptions, answers, resultsReady});

@@ -1,3 +1,4 @@
+// new user
 export const signup = (info) => (
   dispatch => {
     fetch('/auth/signup', {
@@ -11,13 +12,13 @@ export const signup = (info) => (
         type: 'SIGNUP',
         value: response
       }
-      console.log('Response', response);
       dispatch(action);
     })
     .catch(error => console.log('SIGNUP ERROR:', error))
   }
 );
 
+// request for authentication
 export const login = (creds) => (
   dispatch => {
     fetch('/auth/login', {
@@ -32,7 +33,6 @@ export const login = (creds) => (
         username: response.data.username,
         value: true,
       }
-      console.log('response', response);
       localStorage.setItem('token', response.accessToken);
       dispatch(action);
       // document.cookie = `token=${response.accessToken};`;
@@ -46,6 +46,7 @@ export const logout = () => ({
   value: false
 });
 
+// happens on initial load of quiz
 export const getQuizQuestions = () => {
   let token = localStorage.getItem('token');
   return (
@@ -65,9 +66,12 @@ export const getQuizQuestions = () => {
       })
       .catch(error => console.log('q', error));
     }
-  )
+  );
 };
 
+// calls everytime there is a new question
+// this is intentionally overkill on my part
+// gain experience handling authorization
 export const getAnswerOptions = id => {
   let token = localStorage.getItem('token');
   return (
@@ -87,7 +91,7 @@ export const getAnswerOptions = id => {
       })
       .catch(error => console.log('a', error));
     }
-  )
+  );
 };
 
 export const nextQuestion = () => ({

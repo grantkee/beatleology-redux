@@ -17,11 +17,12 @@ export default function Main(props) {
 
   const {username} = user;
 
+  // send request for all quiz questions upon initial loading of page
   useEffect(() => {
       getQuizQuestions();
   },[]);
   
-  //once we have quiz questions, load the first question
+  // load the first question after server responds
   useEffect(()=>{
     if(questions.length !== 0){
       let q = questions[questionId];
@@ -32,6 +33,7 @@ export default function Main(props) {
   },[questions.length]);
 
 
+  // load next question unless last question
   const handleAnswerSelection = (e) => {
     let selection = e.currentTarget.id;
     setAnswer(selection);
@@ -53,6 +55,7 @@ export default function Main(props) {
     setAnswer('');
   };
 
+  // part of authorization with front-end
   const renderQuiz = () => {
     if(!localStorage.getItem('token')){
       logout();
@@ -76,6 +79,7 @@ export default function Main(props) {
     <Results results={answers} user={username} />
   );
 
+  // user is either taking quiz or viewing results
   return (
     <div className="App">
       <Header />

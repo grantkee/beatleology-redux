@@ -1,5 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+
+//import local files
 const quizRouter = require('./routers/quiz');
 const authRouter = require('./routers/authentication');
 const {logger} = require('./middleware');
@@ -15,8 +18,12 @@ app.use(logger);
 app.use('/quiz', quizRouter);
 app.use('/auth', authRouter)
 
-app.get('/', (req, res) => {
-  res.send('connected')
+//connect server to front end
+app.use(express.static(path.join(__dirname, "../build")));
+
+app.get("*", function(req, res) {
+  console.log("you got it bro XD");
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
 
 app.listen(port, () => {

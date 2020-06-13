@@ -14,7 +14,6 @@ const saltRounds = 10;
 
 const signup = (req, res) => {
   const {firstName, lastName, username, email, password} = req.body;
-  console.log('body', req.body);
   let sql = "BEGIN; INSERT INTO users (first_name, last_name) VALUES (?, ?); INSERT INTO usersCredentials (id, username, email, password) VALUES (LAST_INSERT_ID(), ?, ?, ?); COMMIT;"
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
@@ -22,7 +21,6 @@ const signup = (req, res) => {
 
     pool.query(sql, (err, results) => {
       if (!err){
-        console.log('signup good - return should send 200');
         return res.status(200).send('Signup Successful!');
       } else {
         console.log('hitting error', err)
@@ -41,7 +39,6 @@ const login = (req, res) => {
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     if (!rows.length) return res.status(400).send('Incorrect email or password');
-    console.log('rows::', rows);
 
     const hash = rows[0].password;
     bcrypt.compare(password, hash)
@@ -53,7 +50,6 @@ const login = (req, res) => {
         exp: Math.floor(Date.now() / 1000) + (60 * 60)
       };
       data.password = 'REDACTED';
-      console.log('data::', data);
   
       const accessToken = jwt.sign(data, accessTokenSecret);
       // const refreshToken = jwt.sign(data, accessTokenSecret);

@@ -41,7 +41,7 @@ export default function Login(props) {
   const {isOn} = user;
 
   const [credentials, setCredentials] = useState({});
-  const [userAuthorized, setUserAuthorized] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
 
   const handleChange = (e) => {
     e.persist();
@@ -53,12 +53,12 @@ export default function Login(props) {
     login(credentials);
   };
 
+  //handle redirect once user is authenticated
   useEffect(() => {
-    console.log('effect hitting', isOn);
-    if(isOn) return setUserAuthorized(true);
+    if(isOn) return setAuthenticated(true);
   }, [user])
   
-  if(userAuthorized) return <Redirect to='/quiz' />
+  if(authenticated) return <Redirect to='/quiz' />
 
   return (
     <Container component="main" maxWidth="xs">

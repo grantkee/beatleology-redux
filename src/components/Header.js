@@ -5,12 +5,13 @@ import Copyright from './Copyright';
 import Button from '@material-ui/core/Button';
 
 const Header = React.memo((props) => {
-  const {user, logout} = props;
+  const {user, logout, resultsReady} = props;
 
+  // when using guest route, only show login/signup - after quiz, guest can revisit their results until page is refreshed
   return (
     <div className="app">
       <img src={logo} className="app-logo" alt="logo"/>
-      <Link to='/' style={{textDecoration: 'none'}}><h2 className="app-header">Beatleology Quiz</h2></Link>
+      <Link to='/' style={{textDecoration: 'none'}}><h2 className="app-header">Inner-Beatle Quiz</h2></Link>
       <div>
         {user.isOn ? (
           <Link to='/'><Button onClick={() => logout()}>Logout</Button></Link>
@@ -19,7 +20,11 @@ const Header = React.memo((props) => {
             <Link to='/login'><Button>LOGIN</Button></Link>
             <Link to='/signup'><Button>SIGN UP</Button></Link>
             { !window.location.href.includes('/guest') &&
-              <Link to='/guest'><Button onClick={() => localStorage.setItem('token', 'guest')}>Continue as Guest</Button></Link>
+              ( resultsReady ?
+                <Link to='/guest'><Button>View Results</Button></Link>
+                :
+                <Link to='/guest'><Button onClick={() => localStorage.setItem('token', 'guest')}>Continue as Guest</Button></Link>
+              )
             }
             </>
         )}
